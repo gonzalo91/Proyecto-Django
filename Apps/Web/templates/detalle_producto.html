@@ -1,0 +1,143 @@
+{% extends 'base_web.html' %}
+{% load static  %}
+
+{% block content %}
+
+    <div class="breadcrumb-area bg-img border-top-1 pt-55">
+        <div class="container">
+            <div class="breadcrumb-content-2">
+                <ul>
+                    <li><a class="active" href="{% url 'web.index'%}">home</a></li>
+                    <li><a class="active" href="#">{{ product.collection_center_id }} </a></li>
+                    <li>{{ product.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="product-details ptb-100 pb-90">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-md-12 col-lg-7 col-12">
+                    <div class="product-details-img-content">
+                        <div class="product-details-tab mr-70">
+                            <div class="product-details-large tab-content">
+                                <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
+                                    <div class="easyzoom easyzoom--overlay">
+                                        <a >
+                                            <img src="{{ product.image }}" alt="Medicina">
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-5 col-12">
+                    <div class="product-details-content">
+                        <h3>{{ product.name }}</h3>                                
+                        <h4 class="text-primary">{{ product.collection_center }}</h4>  
+                        <div class="details-price">
+                            <span>${{ product.price }} </span>
+                        </div>
+                        <p>{{ product.description }}</p>                                
+                        <div class="quickview-plus-minus">
+                            <div class="cart-plus-minus">
+                                <input type="text" value="1" name="qtybutton" id="qtybutton" class="cart-plus-minus-box">
+                            </div>
+                            <div class="quickview-btn-cart">
+                                <a class="btn-hover-black" id="agregarProducto">Agregar</a>
+                            </div>                            
+                        </div>
+                        <div class="product-categories product-cat-tag">
+                            <ul>
+                                <li class="categories-title">Categoria:</li>
+                                <li><a href="#">{{ product.category }}</a></li>                                
+                            </ul>
+                        </div>
+                        
+                        <div class="product-share">
+                            <ul>
+                                <li class="categories-title">Share :</li>
+                                <li>
+                                    <a href="https://www.facebook.com/BrayanGzzdHdz4">
+                                        <i class="ion-social-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/BrayanGzzdHdz4">
+                                        <i class="ion-social-tumblr"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/BrayanGzzdHdz4">
+                                        <i class="ion-social-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/BrayanGzzdHdz4">
+                                        <i class="ion-social-instagram-outline"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-description-review-area pb-100">
+        <div class="container">
+            <div class="product-description-review text-center">
+                <div class="description-review-title nav" role=tablist>
+                    <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
+                        Description
+                    </a>
+                    
+                </div>
+                <div class="description-review-text tab-content">
+                    <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
+                        <p>{{product.description}}</p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-collection-area pb-60">
+        <div class="container">
+            <div class="section-title text-center mb-55">
+                <h2>Productos Relacionados</h2>   
+            </div>
+            <div class="row">
+                <div class="new-collection-slider owl-carousel">
+                    {% for product in products_related %}
+                    <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
+                        {% include 'single_product.html' %}
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-collection-area pb-60">
+        <div class="container">
+            <div class="section-title text-center mb-55">
+                <h2>Ofrecidos por el Centro de Acopio...</h2>   
+            </div>
+            <div class="row">
+                <div class="new-collection-slider owl-carousel">
+                    {% for product in c_c_items %}
+                    <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
+                        {% include 'single_product.html' %}
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

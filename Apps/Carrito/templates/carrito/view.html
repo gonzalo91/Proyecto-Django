@@ -1,0 +1,94 @@
+{% extends 'base_web.html' %}
+  
+    
+       
+{% block content %}  
+
+
+
+
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url('https://static3.elcorreo.com/www/multimedia/201806/07/media/cortadas/fortnite-shopping-carts-item-kcU-U5021580989059ME-624x385@El%20Correo.jpg');background-repeat: no-repeat;background-size: cover;/* position: absolute; */background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2 class="text-white">cart page</h2>
+            <ul>
+                <li><a href="#">home</a></li>
+                <li> cart </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- shopping-cart-area start -->
+<div class="cart-main-area pt-95 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 class="cart-heading">Cart</h1>
+                <form action="#">
+                    
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-name">remove</th>
+                                    <th class="product-price">images</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if empty %}
+                                    <h1>Sin Items</h1>
+                                {% else %}
+                                {% for item in cart_items %}
+                                    <tr>
+                                        <td class="product-remove"><a href="{% url 'detalle_producto' 2 %}?qty=0"><i class="ion-android-close"></i></a></td>
+                                        <td class="product-thumbnail">
+                                            <a href="{% url 'detalle_producto' item.product.id %}"><img src="{{item.product.image }}" width="80px" height="80px" alt=""></a>
+                                        </td>
+                                        <td class="product-name"><a href="#">{{item.product.name}} </a></td>
+                                        <td class="product-price"><span class="amount">${{item.product.price}}</span></td>
+                                        <td class="product-quantity">
+                                            <input value="{{item.quantity}}" type="text" readonly>
+                                        </td>
+                                        <td class="product-subtotal">${{item.subtotal}}</td>
+                                        
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="coupon-all">
+                                <div class="coupon">
+                                    <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Cart totals</h2>
+                                <ul>
+                                    <li>Total<span>$ {{cart.total}}</span></li>
+                                </ul>
+                                <a href="#">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+         
+            
+            
+        

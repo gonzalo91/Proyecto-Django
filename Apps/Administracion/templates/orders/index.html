@@ -1,0 +1,66 @@
+{% extends "../base.html" %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Pedidos</h3>                 
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm m-0 float-right">
+                    {% if page_obj.has_previous %}                        
+                        <li class="page-item"><a class="page-link" href="?page=1">«</a></li>                        
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                    {% endif %}
+                                        
+                    
+                    <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>                        
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">»</a></li>
+                    {% endif %}                    
+                  </ul>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">id</th>
+                      <th>Cliente</th>
+                      <th>Creado</th>                      
+                      <th >Despachado</th>
+                      <th >Estatus</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in order_list %}
+                    <tr>
+                      <td>
+                        <a href="{% url 'order_view' pk=order.id %}">{{ order.id }}</a>
+                      </td>
+                      <td>
+                        <a href="{% url 'order_view' pk=order.id %}">{{ order.user.first_name }}</a>
+                      </td>
+                      <td>
+                        {{ order.created_at }}                       
+                      </td>                        
+                      <td>{{ order.date_at }}</td>              
+                      <td>{{ order.statusText }}</td>  
+                    </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            
+          </div>
+        </div>
+    </div>
+{% endblock %}

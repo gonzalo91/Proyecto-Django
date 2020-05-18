@@ -1,0 +1,59 @@
+<div class="product-area pb-100">
+    <div class="container">
+        <div class="section-title text-center mb-35">
+            <h2>Categorias</h2>
+            <p>Guia para elegir los productos</p>
+        </div>
+        <div class="product-style">
+            <div class="product-tab-list text-center mb-45 nav product-menu-mrg" role="tablist">
+                {% for categoria in categorias %}
+                <a {% if categoria.id == 1 %}class="active"{% endif %} href="#home{{categoria.id}}" data-toggle="tab" role="tab" aria-selected="{% if categoria.id == 1 %}true{% else %}false{% endif %}" aria-controls="home{{categoria.id}}">
+                <h4>{{categoria.name}}</h4>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="tab-content jump">
+                {% for categoria in categorias %}
+                <div class="tab-pane {% if categoria.id == 1 %}active show{% endif %} fade" id="home{{categoria.id}}" role="tabpanel">
+                    <div class="row">
+                    <div class="product-slider-active owl-carousel">
+                        {% for producto in categoria.get_products %}
+                        <div class="col-md-3 col-lg-3 col-sm-4">
+                            <div class="single-product">
+                                <div class="product-img">
+                                <a href="{% url 'web.index'  %}"><img src="{{producto.image.url}}" alt=""></a>
+                                <span>sale</span>
+                                <div class="product-action">
+                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
+                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
+                                </div>
+                                </div>
+                                <div class="product-content">
+                                <div class="product-title-price">
+                                    <div class="product-title">
+                                        <h4><a href="#">{{producto.name}}</a></h4>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>${{producto.price}}</span>
+                                    </div>
+                                </div>
+                                <div class="product-cart-categori">
+                                    <div class="product-cart">
+                                        <span>{{producto.category_id}}</span>
+                                    </div>
+                                    <div class="product-categori">
+                                        <a href="{% url 'web.index'  %}?qty=1"><i class="ion-bag"></i> Add to cart</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

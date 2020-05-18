@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header with-border">
+                        <h3 class="card-title">Producto [ {{ product.name }} ]</h3>                        
+                        <form method="post" action="{% url 'product_delete' pk=product.id  %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="pk" value="{{ product.id }}">
+                            <button class="btn btn-danger btn-sm float-right"><i class="nav-icon fas fa-trash"></i> Borrar</button> 
+                        </form>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="post" action="{% url 'product_edit' pk=product.id %}">
+                        {% csrf_token %}
+                    
+                        <div class="card-body">
+                            
+                            {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            {% for field in form.visible_fields %}
+                                <div class="form-group ">
+                                    {{ field.label_tag }}
+                                    {% render_field field class="form-control" %}
+                                    {% if field.help_text %}
+                                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}                                                        
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="card-footer right">                            
+                            <button class="btn btn-sm btn-success float-right" type="submit">
+                                <i class="nav-icon fas fa-save"></i> Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

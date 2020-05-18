@@ -1,0 +1,222 @@
+{% extends 'base_web.html' %}
+{% load static %}
+
+{% block content %}
+      
+      
+      {% include 'home_web/sliders.html' %}
+
+
+      <div class="banner-area pt-100 pb-70">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6 col-lg-3 col-12">
+                  <div class="single-banner mb-30">
+                     <a href="shop-grid-view-sidebar.html"><img src="{% static '/web/img/banner/1baner.jpg' %}" alt=""></a>
+                     <div class="banner-content banner-content-position1">
+                        <h3>morden <span>sofa</span></h3>
+                        <p>Sale up to <span>30% off</span> all product in the new collection</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="d-sm-none d-lg-block col-lg-6 col-12">
+                  <div class="single-banner mb-30">
+                     <a href="shop-grid-view-sidebar.html"><img src="{% static '/web/img/banner/baner2.jpg' %}" alt=""></a>
+                     <div class="banner-content banner-content-position2">
+                        <span>Summer Sale</span>
+                        <h3>morden <span>chair</span></h3>
+                        <p>Sale up to <span>30% off</span> all product <br>in the new collection</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 col-lg-3 col-12">
+                  <div class="single-banner mb-30">
+                     <a href="shop-grid-view-sidebar.html"><img src="{% static '/web/img/banner/baner3.jpg' %}" alt=""></a>
+                     <div class="banner-content banner-content-position3">
+                        <h3>morden <span>chair</span></h3>
+                        <p>Sale up to <span>30% off</span> all product in the new collection</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      {% include 'home_web/categories.html' %}
+
+      
+
+
+      <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(https://info7rm.blob.core.windows.net.optimalcdn.com/images/2017/09/20/rayados.jpg)" data-overlay="3">
+         <div class="container">
+            <div class="shop-limited-content text-center">
+               <h2>Medicamentos y productos a bajo precio</h2>               
+            </div>
+         </div>
+      </div>
+
+      <div class="product-collection-area pt-100 pb-50">
+         <div class="container">
+            <div class="section-title text-center mb-55">
+               <h2>Medicinas</h2>
+               <p>{{ q }}</p>
+            </div>
+            <div class="row">
+               {% for product in medicines %}
+               <div class="col-md-6 col-lg-4 col-xl-3">
+                  <div class="single-product mb-35">
+                     <div class="product-img">
+                        <a href="{% url 'detalle_producto' pk=product.id %}">
+                           <img style="max-height:160px;" src="{{ product.image }}" alt="">
+                        </a>
+                        <span class="badge badge-primary">{{ product.typeText }}</span>
+                        <div class="product-action">
+                           <a title="Wishlist" class="animate-left" href="{% url 'detalle_producto' pk=product.id %}"><i class="ion-ios-heart-outline"></i></a>
+                           <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
+                        </div>
+                     </div>
+                     <div class="product-content">
+                        <div class="product-title-price">
+                           <div class="product-title">
+                              <h4><a href="{% url 'detalle_producto' pk=product.id %}">{{ product.name }}</a></h4>
+                           </div>
+                           <div class="product-price">
+                              <span>$ {{ product.price }}</span>
+                           </div>
+                        </div>
+                        <div class="product-cart-categori">
+                           <div class="product-cart">
+                              <span>{{ product.category }}</span>
+                           </div>
+                           <div class="product-categori">
+                              <a href="#"><i class="ion-bag"></i> Agregar</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+
+
+      <div class="product-collection-area pt-100 pb-50">
+         <div class="container">
+            <div class="section-title text-center mb-55">
+               <h2>Productos</h2>
+               <p>{{ q }}</p>
+            </div>
+            <div class="row">
+               {% for product in products %}
+               <div class="col-md-6 col-lg-4 col-xl-3">
+                  <div class="single-product mb-35">
+                     <div class="product-img">
+                        <a href="{% url 'detalle_producto' pk=product.id %}">
+                           <img style="max-height:200px;" src="{{ product.image }}" alt="">
+                        </a>
+                        <span class="badge badge-primary">{{ product.typeText }}</span>
+                        <div class="product-action">
+                           <a title="Wishlist" class="animate-left" href="{% url 'detalle_producto' pk=product.id %}"><i class="ion-ios-heart-outline"></i></a>
+                           <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
+                        </div>
+                     </div>
+                     <div class="product-content">
+                        <div class="product-title-price">
+                           <div class="product-title">
+                              <h4><a href="{% url 'detalle_producto' pk=product.id %}">{{ product.name }}</a></h4>
+                           </div>
+                           <div class="product-price">
+                              <span>$ {{ product.price }}</span>
+                           </div>
+                        </div>
+                        <div class="product-cart-categori">
+                           <div class="product-cart">
+                              <a href="#"><i class="ion-bag"></i> Agregar</a>
+                           </div>
+                        
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+
+      <div class="product-collection-area pt-100 pb-50">
+         <div class="container">
+            <div class="section-title text-center mb-55">
+               <h2>Servicios</h2>
+               <p>{{ q }}</p>
+            </div>
+            <div class="row">
+               {% for product in services %}
+               <div class="col-md-6 col-lg-4 col-xl-3">
+                  <div class="single-product mb-35">
+                     <div class="product-img">
+                        <a href="{% url 'detalle_producto' pk=product.id %}"><img style="max-height:200px;" src="{{ product.image }}" alt=""></a>
+                        <span class="badge badge-primary">{{ product.typeText }}</span>
+                        <div class="product-action">
+                           <a title="Wishlist" class="animate-left" href="{% url 'detalle_producto' pk=product.id %}"><i class="ion-ios-heart-outline"></i></a>
+                           <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
+                        </div>
+                     </div>
+                     <div class="product-content">
+                        <div class="product-title-price">
+                           <div class="product-title">
+                              <h4><a href="{% url 'detalle_producto' pk=product.id %}">{{ product.name }}</a></h4>
+                           </div>
+                           <div class="product-price">
+                              <span>$ {{ product.price }}</span>
+                           </div>
+                        </div>
+                        <div class="product-cart-categori">
+                           <div class="product-cart">
+                              <a href="#"><i class="ion-bag"></i> Agregar</a>
+                           </div>
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+
+         
+
+      <div class="blog-area pb-65">
+         <div class="container">
+            <div class="section-title text-center mb-55">
+               <h2> Mejores Centros de Acopio</h2>
+            </div>
+            <div class="row">
+               {% for c_c in collection_centers %}
+               <div class="col-lg-4 col-md-6">
+                  <div class="single-blog mb-30">
+                     <div class="blog-img">
+                        <a href="#"><img class="mw-100 mh-100" style="width:300px;" src="{{ c_c.image }}" alt=""></a>
+                     </div>
+                     <div class="blog-info">
+                        <h3><a href="#">{{ c_c.name }}</a></h3>
+                        <!--
+                           <div class="blog-meta">
+                                 <ul>
+                                    <li>February 13</li>
+                                    <li><a href="#">Momen Bhuiyan</a></li>
+                                    <li><a href="#">4 comments</a></li>
+                                 </ul>
+                           </div>
+                           -->
+                        <p>{{ c_c.description }}</p>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}                        
+            </div>
+         </div>
+      </div>
+{% endblock %}
+      

@@ -1,0 +1,63 @@
+{% extends "../base.html" %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Productos</h3> 
+                <a href="{% url 'new_product' %}" class="ml-2 btn btn-sm btn-success">Nuevo</a>               
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm m-0 float-right">
+                    {% if page_obj.has_previous %}                        
+                        <li class="page-item"><a class="page-link" href="?page=1">«</a></li>                        
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                    {% endif %}
+                                        
+                    
+                    <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>                        
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">»</a></li>
+                    {% endif %}                    
+                  </ul>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Nombre</th>
+                      <th>Estatus</th>
+                      <th style="width: 40px">Stock</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for product in product_list %}
+                    <tr>
+                      <td>{{ product.id }}</td>
+                      <td>
+                        <a href="{% url 'product_edit' pk=product.id %}">{{ product.name }}</a>
+                      </td>
+                      <td>
+                        {{ product.statusText }}
+                      </td>
+                      <td><span class="badge bg-danger">{{ product.stock }}</span></td>
+                    </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            
+          </div>
+        </div>
+    </div>
+{% endblock %}

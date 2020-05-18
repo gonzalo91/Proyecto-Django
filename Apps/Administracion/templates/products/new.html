@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header with-border">
+                        <h3 class="card-title">Nuevo Producto </h3>                                                
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="post" action="{% url 'new_product' %}">
+                        {% csrf_token %}
+                    
+                        <div class="card-body">
+                                                        
+                            {% for field in form.visible_fields %}
+                                <div class="form-group ">
+                                    {{ field.label_tag }}
+                                    {% render_field field class="form-control" %}
+                                    {% if field.help_text %}
+                                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}                                                        
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="card-footer right">                            
+                            <button class="btn btn-sm btn-success float-right" type="submit">
+                                <i class="nav-icon fas fa-save"></i> Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header with-border">
+                        <h3 class="card-title">Orden [ {{ order.id }} ]</h3>                                                
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    
+                    
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="card " >
+                                        <div class="card-body">
+                                        
+                                            <h5 class="card-title"><strong>Cliente:</strong> {{ order.user.first_name }}</h5>                                            
+                                            <p class="card-text text-success">Monto: $ {{ extras.amount }}</p>
+
+                                            <p class="card-text text-secondary">Productos Vendidos: {{ extras.sold }}</p>
+                                            <p class="card-text bg-info text-danger pl-1">Productos Donados:  {{ extras.donated }}</p>
+
+                                            Estatus: <a href="#" class="card-link">{{ order.statusText }}</a><br>
+                                            Fecha de entrega: <a href="#" class="card-link">{{ order.date_at }}</a><br>
+                                            Fecha de creacion: <a href="#" class="card-link">{{ order.created_at }}</a>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-md-7">
+                                    
+                                    <ul class="list-group">
+                                        <li class="list-group-item font-weight-bold" >Productos en el pedido</li>
+
+                                        {% for order_detail in order_details %}
+                                            <li 
+                                                {% if order_detail.donated %}
+                                                    class="list-group-item list-group-item-primary"
+                                                {% else %}
+                                                    class="list-group-item list-group-item-dark"
+                                                {% endif %}
+                                            >
+                                                {{ order_detail.name }} - Cantidad : {{ order_detail.qty}} - $ {{ order_detail.price }} 
+                                            </li>
+                                        {% endfor %}                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                                                                                  
+                        </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
