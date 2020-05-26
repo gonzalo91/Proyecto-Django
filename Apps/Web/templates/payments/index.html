@@ -1,0 +1,123 @@
+{% extends 'base_web.html' %}
+{% load static  %}
+
+{% block content %}
+    <div class="breadcrumb-area pt-205 pb-210 mb-4" style="background-image: url('{% static 'img/checkout.jpg' %}');background-repeat: no-repeat;background-size: cover;/* position: absolute; */background-position: center center;">
+            <div class="container">
+                <div class="breadcrumb-content container-slider-home">
+                    <h2 class="text-white">Realizar Pedidos</h2>
+                   
+                </div>
+            </div>
+        </div>
+    <div class="container">
+
+        
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Recuerda:</strong> No Pagar precios excesivos por productos donados, estos son adquiridos a traves de donaciones al centro de acopio
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <strong>Verifica... </strong> Que el Centro de Acopio se encuentre cerca de tu domicilio y de solo obtener los productos que necesitas.
+                </div>
+            </div>
+        </div>
+
+        {% for collection_center in collection_centers %}
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ collection_center.image }}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ collection_center.name }}</h5>
+                            <div class="card-title font-italic">
+                                <strong>Direccion:</strong> {{ collection_center.address }}
+                            </div>
+                            <div class="card-text">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col" class="text-center">Cantidad</th>
+                                            <th scope="col" class="text-center">Donado</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in collection_center.items_cart %}
+                                            
+                                            <tr>
+                                                
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ item.product.name }}</td>
+                                                <td class="text-center">{{ item.quantity }}</td>
+                                                <td class="text-center">
+                                                    {% if item.product.donated %}
+                                                        <i class="ion-ios-checkmark text-success h4"></i>
+                                                    {% else %}
+                                                        <i class="ion-android-close text-danger h4"></i>
+                                                    {% endif %}
+                                                    
+                                                </td>
+                                                <td>{{ item.subtotal  }}</td>
+                                            </tr>                                             
+                                        {% endfor %}                                                                          
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">-</th>
+                                            <th scope="col" class="text-center">-</th>
+                                            <th scope="col" class="text-center">-</th>
+                                            <th scope="col" >{{ collection_center.total_cart }}</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>     
+                            <div class="card-footer text-muted text-right">
+                                <form action="{% url 'makeorder' %}" method="POST">{% csrf_token %}
+                                    <input type="hidden" name="c_c" value="{{ collection_center.id }}">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3 col-sm-12 text-left" >
+                                            <label for="inputEmail4">Fecha de recogida</label>
+                                            <input type="text" name="date_at" class="datepicker_checkout form-control" required>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-12">
+                                            <label class="mt-2 text-info" for="inputEmail4">Tiene un periodo de <strong>7 dias </strong> para recoger su pedido, en caso de no asistir a adquirirlo, su pedido será cancelado</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-12 d-flex align-items-center pl-4" >                                                                                        
+                                            <button class="btn btn-success btn-lg align-middle">
+                                                Realizar Pedido <i class="ion-android-playstore"></i>
+                                            </button>
+                                        </div>
+                                    </div>                                                                                                    
+                                </form>
+                            </div>                   
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+                
+        
+        </div>
+        <hr>
+
+        {% endfor %}
+        
+
+        
+    </div>
+    
+
+    
+
+{% endblock %}

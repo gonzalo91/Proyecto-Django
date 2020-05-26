@@ -18,19 +18,28 @@ from django.urls import path, include
 
 from Apps.Administracion.views import HomeApi, action_order
 
-from Apps.Web.views import index_view, detalle_producto
+from Apps.Web.views import index_view, detalle_producto, checkout, make_order, orders
 from Apps.Carrito.views import view
 
 urlpatterns = [
     path('', index_view, name="web.index"),
 
     path('producto/<int:pk>', detalle_producto, name="detalle_producto"),
-    path('ct', view, name="cart"),
+
+    
+
+
+    path('carrito/', include('Apps.Carrito.urls')),
+
+    path('checkout/', checkout, name="checkout"),
+    path('makeorder/', make_order, name="makeorder"),
+
+    path('profile/order/<int:pk>', orders, name="profile.order"),
 
     path('admin/', admin.site.urls),
 
     path('accounts/', include('django.contrib.auth.urls')),
-
+    
     path(r'api/administrador/home', HomeApi.as_view()),
     path(r'api/administrador/action_order', action_order),
 

@@ -64,36 +64,7 @@
             <div class="row">
                {% for product in medicines %}
                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="single-product mb-35">
-                     <div class="product-img">
-                        <a href="{% url 'detalle_producto' pk=product.id %}">
-                           <img style="max-height:160px;" src="{{ product.image }}" alt="">
-                        </a>
-                        <span class="badge badge-primary">{{ product.typeText }}</span>
-                        <div class="product-action">
-                           <a title="Wishlist" class="animate-left" href="{% url 'detalle_producto' pk=product.id %}"><i class="ion-ios-heart-outline"></i></a>
-                           <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-content">
-                        <div class="product-title-price">
-                           <div class="product-title">
-                              <h4><a href="{% url 'detalle_producto' pk=product.id %}">{{ product.name }}</a></h4>
-                           </div>
-                           <div class="product-price">
-                              <span>$ {{ product.price }}</span>
-                           </div>
-                        </div>
-                        <div class="product-cart-categori">
-                           <div class="product-cart">
-                              <span>{{ product.category }}</span>
-                           </div>
-                           <div class="product-categori">
-                              <a href="#"><i class="ion-bag"></i> Agregar</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  {% include '../single_product.html' %}
                </div>
                {% endfor %}
             </div>
@@ -110,34 +81,7 @@
             <div class="row">
                {% for product in products %}
                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="single-product mb-35">
-                     <div class="product-img">
-                        <a href="{% url 'detalle_producto' pk=product.id %}">
-                           <img style="max-height:200px;" src="{{ product.image }}" alt="">
-                        </a>
-                        <span class="badge badge-primary">{{ product.typeText }}</span>
-                        <div class="product-action">
-                           <a title="Wishlist" class="animate-left" href="{% url 'detalle_producto' pk=product.id %}"><i class="ion-ios-heart-outline"></i></a>
-                           <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-content">
-                        <div class="product-title-price">
-                           <div class="product-title">
-                              <h4><a href="{% url 'detalle_producto' pk=product.id %}">{{ product.name }}</a></h4>
-                           </div>
-                           <div class="product-price">
-                              <span>$ {{ product.price }}</span>
-                           </div>
-                        </div>
-                        <div class="product-cart-categori">
-                           <div class="product-cart">
-                              <a href="#"><i class="ion-bag"></i> Agregar</a>
-                           </div>
-                        
-                        </div>
-                     </div>
-                  </div>
+                  {% include '../single_product.html' %}
                </div>
                {% endfor %}
             </div>
@@ -152,34 +96,9 @@
             </div>
             <div class="row">
                {% for product in services %}
-               <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="single-product mb-35">
-                     <div class="product-img">
-                        <a href="{% url 'detalle_producto' pk=product.id %}"><img style="max-height:200px;" src="{{ product.image }}" alt=""></a>
-                        <span class="badge badge-primary">{{ product.typeText }}</span>
-                        <div class="product-action">
-                           <a title="Wishlist" class="animate-left" href="{% url 'detalle_producto' pk=product.id %}"><i class="ion-ios-heart-outline"></i></a>
-                           <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                        </div>
-                     </div>
-                     <div class="product-content">
-                        <div class="product-title-price">
-                           <div class="product-title">
-                              <h4><a href="{% url 'detalle_producto' pk=product.id %}">{{ product.name }}</a></h4>
-                           </div>
-                           <div class="product-price">
-                              <span>$ {{ product.price }}</span>
-                           </div>
-                        </div>
-                        <div class="product-cart-categori">
-                           <div class="product-cart">
-                              <a href="#"><i class="ion-bag"></i> Agregar</a>
-                           </div>
-                           
-                        </div>
-                     </div>
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                     {% include '../single_product.html' %}
                   </div>
-               </div>
                {% endfor %}
             </div>
          </div>

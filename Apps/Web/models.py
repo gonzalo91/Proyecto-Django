@@ -110,6 +110,9 @@ class OrderDetail(models.Model):
     price   = models.DecimalField( max_digits=9, decimal_places=2)
     qty     = models.PositiveIntegerField()
 
+    def subtotal(self):
+        return self.qty * self.price
+
     def __str__(self):
         return 'Order: {0} - prd: {1} - price: {2} - qty : {3} - donated : {4}'.format(self.order, self.name, self.price, self.qty, self.donated)  
 

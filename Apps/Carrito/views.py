@@ -1,12 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 
-# Create your views here.
+from rest_framework.views import APIView
+from django.contrib.auth.decorators import login_required
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response    import Response
+
 from Apps.Web.models import Product
-#from web.models import Cliente
-
 from .models import Cart, CartItem
 
-from django.contrib.auth.decorators import login_required
 
 
 @login_required
@@ -14,8 +17,82 @@ def view(request):
     cart = Cart.objects.filter(user = request.user)
     
     cart_items = CartItem.objects.filter(cart__in = Cart.objects.filter(user = request.user))
-    print(cart_items)
-    return render(request, "carrito/view.html", {'cart_items' : cart_items})
+    
+    total = 0
+
+    products = Product.objects.filter(stock__gt=1).exclude(id__in = cart_items.values('product__id'))[:2]
+    print(products.query)
+    for item in cart_items:
+        total += item.subtotal()
+
+    return render(request, "carrito/view.html", {'cart_items' : cart_items, 'total' : total, 'products' : products})
+
+@login_required
+def delete(request, pk):
+    if request.method == "POST":
+        
+        cart_item = get_object_or_404(CartItem ,
+                        cart__in = Cart.objects.filter(user = request.user), 
+                        pk = pk
+                    )
+        
+        cart_item.delete()
+        
+    return redirect(view)
+
+@login_required
+def update(request, pk):
+    if request.method == "POST":
+        cart_item = get_object_or_404(CartItem ,
+            cart__in = Cart.objects.filter(user = request.user), 
+            pk = pk
+        )
+        
+        cart_item.quantity = request.POST['quantity']
+        cart_item.save()
+    
+    return redirect(view)    
+
+
+@login_required
+def create(request, product):
+    if request.method == "POST":
+        product = get_object_or_404(Product ,            
+            pk = product
+        )
+
+        cart, created = Cart.objects.get_or_create(          
+            user=request.user,            
+        )
+
+        cart_item, created = CartItem.objects.get_or_create(
+            cart = cart,
+            product   = product
+        )
+        
+        if created:
+            cart_item.quantity = request.POST['quantity']
+        else:
+            cart_item.quantity += int(request.POST['quantity'])
+
+        cart_item.save()
+    
+    return redirect(view)   
+
+
+
+
+
+
+'''
+class CartApi(APIView):
+    permission_classes = (IsAuthenticated,)
+    def delete(self, request):                
+        CartItem.objects.filter(cart__in = Cart.objects.filter(user = request.user))
+        
+        return Response(response)
+'''
+
 '''     
 def update_cart(request, slug):
     client_id = request.session['client_id']

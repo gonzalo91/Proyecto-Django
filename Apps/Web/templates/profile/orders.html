@@ -1,0 +1,42 @@
+
+{% extends '../base_web.html' %}
+
+
+
+{% block content %}
+
+
+
+Pedido #{{ order.id }}
+
+<ul>
+    {% for detail in order_details %}
+    
+        <li> {{ detail.name }} - {{ detail.subtotal }}</li>
+
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+
+
+
+{% block js_scripts %}
+
+{% if messages %}
+    {% for message in messages %}
+    <script>
+        Swal.fire(
+            'Pedido Realizado!',
+            'Acude lo antes posible al Centro de Acopio para tener tu pedido',
+            'success'
+        )
+    </script>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
+
+
+

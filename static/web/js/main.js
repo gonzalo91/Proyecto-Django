@@ -396,7 +396,13 @@
     
     
     
+    
 
+    jQuery( ".datepicker_checkout" ).datepicker({        
+        minDate: '-0D',
+        maxDate: '+7D',
+        dateFormat: 'yy-mm-dd'
+    });
 
 
 

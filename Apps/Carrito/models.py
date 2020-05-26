@@ -16,12 +16,13 @@ class CartItem(models.Model):
             return str(self.cart)
         except:
             return self.product.name
+            
     def subtotal(self):
-        return float(self.quantity)*float(self.product.price)
+        return self.quantity * self.product.price
 
 class Cart(models.Model):
     id      = models.AutoField(primary_key=True)
-    user    = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user    = models.ForeignKey(User, null=False, blank=True, on_delete=models.CASCADE)
     total   = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
     active  = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)

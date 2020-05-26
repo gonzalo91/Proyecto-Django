@@ -41,15 +41,20 @@
                         <div class="details-price">
                             <span>${{ product.price }} </span>
                         </div>
-                        <p>{{ product.description }}</p>                                
-                        <div class="quickview-plus-minus">
-                            <div class="cart-plus-minus">
-                                <input type="text" value="1" name="qtybutton" id="qtybutton" class="cart-plus-minus-box">
+                        <p>{{ product.description }}</p>
+                        <form method="post" action="{% url 'create-item-cart' product.id %}">{% csrf_token %}
+                            <div class="quickview-plus-minus">
+                                <div class="cart-plus-minus">
+                                    <input type="text" value="1" name="quantity" id="quantity" class="cart-plus-minus-box">
+                                </div>
+                                <div class="quickview-btn-cart">
+                                    <button type="submit" style="height:46px;" class="btn btn-success">
+                                        Agregar 
+                                        <i class="ion-android-cart"></i>
+                                    </button>
+                                </div>                            
                             </div>
-                            <div class="quickview-btn-cart">
-                                <a class="btn-hover-black" id="agregarProducto">Agregar</a>
-                            </div>                            
-                        </div>
+                        </form>                                                        
                         <div class="product-categories product-cat-tag">
                             <ul>
                                 <li class="categories-title">Categoria:</li>
