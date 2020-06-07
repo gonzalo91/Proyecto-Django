@@ -29,7 +29,7 @@ urlpatterns = [
     
 
 
-    path('carrito/', include('Apps.Carrito.urls')),
+    path('carrito/', include('Apps.Carrito.urls'), name='cart'),
 
     path('checkout/', checkout, name="checkout"),
     path('makeorder/', make_order, name="makeorder"),

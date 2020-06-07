@@ -70,15 +70,10 @@
                             </div>
                         </li>                
                         {% endfor %}
-                        <li class="single-product-cart">
-                            <div class="cart-total">
-                                <h4>Total : <span>$ {{cart.total}}</span></h4>
-                            </div>
-                        </li>
+                        
                         <li class="single-product-cart">
                             <div class="cart-checkout-btn">
-                                <a class="btn-hover cart-btn-style" href="{% url 'web.index' %}">view cart</a>
-                                <a class="no-mrg btn-hover cart-btn-style" href="#">checkout</a>
+                                <a class="btn-hover cart-btn-style" href="{% url 'cart' %}">view cart</a>                                
                             </div>
                         </li>
                     </ul>
