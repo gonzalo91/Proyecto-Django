@@ -113,7 +113,7 @@
                 </div>
                 <div class="single-currency-language-account">
                 <div class="cur-lang-acc-title">
-                    <h4>Nombre: <a href="#"><span>{{ user }}</span></a></h4>
+                    <h4>Nombre: <a href="#"><span>{{ user.first_name }}</span></a></h4>
                 </div>
                 <div class="cur-lang-acc-dropdown">
                     <ul>
@@ -128,7 +128,7 @@
                         <li><a href="{% url 'perfil' %}">Perfil/Pedidos</a></li>
                         <li><a href="{% url 'cart' %}">Carrito de Compra</a></li>
                         <li><a href="#">Mi Wish List</a></li>
-                        <li><a href="{% url 'web.index' %}">Salir</a></li>
+                        <li><a href="{% url 'logout' %}">Salir</a></li>
                         {% else %}
                         <li><a href="{% url 'login' %}">Entrar </a></li>
                         <li><a href="{% url 'web.index' %}">Registrarme</a></li>

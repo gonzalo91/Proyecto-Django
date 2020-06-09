@@ -21,15 +21,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    {% if cart_items.count > 0 %}
-                    <h1 class="cart-heading">Pedido #{{ order.id }}</h1>
+                    {% if order_details.count > 0 %}
+                    <h1 class="cart-heading">Pedido #{{ order.id }} - <span class="text-info">{{ order.collection_center.name }}</span></h1>
                 
                     
                     <div class="table-content table-responsive">
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="product-name">Producto</th>
+                                    <th class="product-name">-</th>
+                                    <th class="product-name">Producto</th>                                    
                                     <th class="product-name">Total:</th>
                                 </tr>
                             </thead>
@@ -39,6 +40,9 @@
                                 {% else %}
                                 {% for detail in order_details %}
                                     <tr>
+                                        <td class="product-price"><span class="amount">
+                                            <img src="{{ detail.product.image }}"  width="60" alt="">
+                                        </span></td>
                                         <td class="product-price"><span class="amount">{{ detail.name }}</span></td>
                                         <td class="product-subtotal">{{ detail.subtotal }}</td>
                                         

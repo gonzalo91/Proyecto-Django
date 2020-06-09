@@ -92,11 +92,11 @@ def orders(request, pk):
 	order = get_object_or_404(Order, pk = pk, user = request.user)
 
 	order_details = OrderDetail.objects.filter(order = order)
-
+	print(order, order_details)
 	return render(request, 'profile/orders.html', {'order' : order, 'order_details' : order_details })
 
 @login_required
 def pefil(request):
-	ordenes = Order.objects.filter(user = request.user)
+	ordenes = Order.objects.filter(user = request.user).order_by('-id')
 	contex = {"ordenes":ordenes}
 	return render(request, 'profile/perfil.html', contex)
