@@ -1,13 +1,69 @@
 
 {% extends '../base_web.html' %}
 
+{% load static %}
 
 
 {% block content %}
 
+<div class="breadcrumb-area pt-205 pb-210" style=" background-image: url('https://soporte.mygestion.com/media/wp-content/uploads/pedidos-ventas-700x467.jpg');background-repeat: no-repeat;background-size: cover;/* position: absolute; */background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2 class="text-white">Ordenes</h2>
+            <ul>
+                <li><a style="color:#fff" href="#">home</a></li>
+                <li style="color: #fff;"> Detalle </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="cart-main-area pt-95 pb-100" style="border-top: 1px solid beige;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% if cart_items.count > 0 %}
+                    <h1 class="cart-heading">Pedido #{{ order.id }}</h1>
+                
+                    
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-name">Producto</th>
+                                    <th class="product-name">Total:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if empty %}
+                                    <h1>Sin Items</h1>
+                                {% else %}
+                                {% for detail in order_details %}
+                                    <tr>
+                                        <td class="product-price"><span class="amount">{{ detail.name }}</span></td>
+                                        <td class="product-subtotal">{{ detail.subtotal }}</td>
+                                        
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <div class="col-md-12 text-center">
+                            <img src="{% static 'web/img/emptycart.png' %}" alt="">
+                            <h3>Lsta Vacia :/</h3>
+                        </div>
+                        
 
+                    {% endif %}
+                    
+                                   
+            </div>
+        </div>
+    </div>
+</div>
 
-Pedido #{{ order.id }}
+<!-- 
 
 <ul>
     {% for detail in order_details %}
@@ -18,7 +74,7 @@ Pedido #{{ order.id }}
 </ul>
 
 {% endblock %}
-
+ -->
 
 
 

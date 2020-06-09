@@ -93,6 +93,10 @@ def orders(request, pk):
 
 	order_details = OrderDetail.objects.filter(order = order)
 
-	return render(request, 'profile/orders.html', 
-						{'order' : order, 'order_details' : order_details })
-	
+	return render(request, 'profile/orders.html', {'order' : order, 'order_details' : order_details })
+
+@login_required
+def pefil(request):
+	ordenes = Order.objects.filter(user = request.user)
+	contex = {"ordenes":ordenes}
+	return render(request, 'profile/perfil.html', contex)

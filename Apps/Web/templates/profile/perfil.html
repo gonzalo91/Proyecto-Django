@@ -1,0 +1,94 @@
+{% extends 'base_web.html' %}
+{% load static %}
+
+    
+       
+{% block content %}  
+
+
+
+{% if cart_items.count > 0 %}
+
+<div class="breadcrumb-area pt-205 pb-210" style=" background-image: url('https://creatuaplicacion.com/wp-content/uploads/2019/02/ver-pedidos.png');background-repeat: no-repeat;background-size: cover;/* position: absolute; */background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2 class="text-white">Perfil</h2>
+            <ul>
+                <li><a style="color:#fff" href="#">home</a></li>
+                <li style="color: #fff;"> Ordenes </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- shopping-cart-area start -->
+<div class="cart-main-area pt-95 pb-100" style="border-top: 1px solid beige;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% if cart_items.count > 0 %}
+                    <h1 class="cart-heading">Lista de Pedidos </h1>
+                
+                    
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-name">No. Pedido</th>
+                                    <th class="product-name">Fecha</th>
+                                    <th class="product-price">Centro de Acopio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if empty %}
+                                    <h1>Sin Items</h1>
+                                {% else %}
+                                {% for orden in ordenes %}
+                                    <tr>
+                                        <td class="product-name">
+                                            <a href="{% url 'profile.order' orden.id %}">{{orden.id}} </a>
+                                        </td>
+                                        <td class="product-price"><span class="amount"><a href="{% url 'profile.order' orden.id %}">{{orden.date_at}}</a></span></td>
+                                        <td class="product-subtotal"><a href="{% url 'profile.order' orden.id %}">{{orden.collection_center.name}}</a></td>
+                                        
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <div class="col-md-12 text-center">
+                            <img src="{% static 'web/img/emptycart.png' %}" alt="">
+                            <h3>Carrito Vacio :/</h3>
+                        </div>
+                        
+
+                    {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="cart-page-total">
+                                <div class="row">
+                                    {% for product in products%}
+                                    <div class="col-md-6">
+                                        {% include 'single_product.html' %}    
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+         
+            
+            
+        

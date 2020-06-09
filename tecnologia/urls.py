@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from Apps.Administracion.views import HomeApi, action_order
 
-from Apps.Web.views import index_view, detalle_producto, checkout, make_order, orders
+from Apps.Web.views import index_view, detalle_producto, checkout, make_order, orders, pefil
 from Apps.Carrito.views import view
 
 urlpatterns = [
@@ -35,6 +35,7 @@ urlpatterns = [
     path('makeorder/', make_order, name="makeorder"),
 
     path('profile/order/<int:pk>', orders, name="profile.order"),
+    path('profile/', pefil, name="perfil"),
 
     path('admin/', admin.site.urls),
 
